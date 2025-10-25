@@ -67,13 +67,13 @@ jobs:
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
-      if: ${{ github.event_name == 'push' }}
+      if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
       with:
         name: VS2022
         path: ./*/*/examples/*.exe
 
     - name: Display SHA-256
-      if: ${{ github.event_name == 'push' }}
+      if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
       run: sha256sum ./*/*/examples/*.exe
 
     - name: Compress release-ready version of Zadig
